@@ -41,6 +41,10 @@ main {
  background-color: white;
 }
 
+.btn-warning {
+ color: white;
+}
+
 .show-container {
  display: flex;
  flex-direction: row;

@@ -18,11 +18,11 @@ function edit_form (data) {
             </div>
             <div className="form-group col-sm-6">
               <label htmlFor="city">City</label>
-              <input className="form-control" id="city" name="city" value={data.place.city} />
+              <input className="form-control" id="city" name="city" value={data.place.city} required/>
             </div>
             <div className="form-group col-sm-6">
               <label htmlFor="state">State</label>
-              <input className="form-control" id="state" name="state" value={data.place.state} />
+              <input className="form-control" id="state" name="state" value={data.place.state} required />
             </div>
             <div className="form-group col">
               <label htmlFor="cuisines">Cuisines</label>
