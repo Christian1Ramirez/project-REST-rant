@@ -19,12 +19,6 @@ function show(data) {
               <h2>Description</h2>
               <p>Located in {data.place.city}, {data.place.state} and serving {data.place.cuisines}</p>
             </section>
-          </div>
-        </div>
-        <section>
-          <h2>Comments</h2>
-          <p>No comments yet!</p>
-        </section>
         <div className="buttons-container">
           <a href={`/places/${data.id}/edit`} className="btn btn-warning">
             Edit
@@ -35,6 +29,12 @@ function show(data) {
             </button>
           </form>
         </div>
+          </div>
+        </div>
+        <section>
+          <h2>Comments</h2>
+          <p>No comments yet!</p>
+        </section>
       </main>
     </Def>
   )
