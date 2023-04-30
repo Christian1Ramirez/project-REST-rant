@@ -21,11 +21,11 @@ function show(data) {
             </section>
         <div className="buttons-container">
           <a href={`/places/${data.id}/edit`} className="btn btn-warning">
-            Edit <i class="fas fa-pencil-alt fa-inverse" aria-hidden="true"></i>
+            Edit <i className="fas fa-pencil-alt fa-inverse" aria-hidden="true"></i>
           </a>
           <form method="POST" action={`/places/${data.id}?_method=DELETE`}>
             <button type="submit" className="btn btn-danger">
-              Delete <i class="fa fa-trash" aria-hidden="true"></i>
+              Delete <i className="fa fa-trash" aria-hidden="true"></i>
             </button>
           </form>
         </div>
