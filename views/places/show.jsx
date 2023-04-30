@@ -7,7 +7,10 @@ function show(data) {
       <main>
         <div className="show-container">
           <div className="image-container">
-            <img src={data.place.pic} alt={data.place.name} />
+            <img src={data.place.pic} alt={data.place.name}/>
+            <h3>
+              Located in {data.place.city}, {data.place.state}
+            </h3>
           </div>
           <div className="info-container">
             <h1>{data.place.name}</h1>
@@ -17,7 +20,12 @@ function show(data) {
             </section>
             <section className="description-rating">
               <h2>Description</h2>
-              <p>Located in {data.place.city}, {data.place.state} and serving {data.place.cuisines}</p>
+              <h3>
+                {data.place.showEstablished()}
+              </h3>
+              <h4>
+                Serving {data.place.cuisines}
+              </h4>
             </section>
         <div className="buttons-container">
           <a href={`/places/${data.id}/edit`} className="btn btn-warning">
