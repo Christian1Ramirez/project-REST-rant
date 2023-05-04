@@ -2,6 +2,25 @@ const React = require('react')
 const Def = require('../default')
 
 function show(data) {
+  let comments = (
+    <h3 className="inactive">
+      No comments yet!
+    </h3>
+  )
+  if (data.place.comments.length) {
+    comments = data.place.comments.map(c => {
+      return (
+        <div className="border">
+          <h2 className="rant">{c.rant ? 'Rant! ðŸ˜¡' : 'Rave! ðŸ˜»'}</h2>
+          <h4>{c.content}</h4>
+          <h3>
+            <stong>- {c.author}</stong>
+          </h3>
+          <h4>Rating: {c.stars}</h4>
+        </div>
+      )
+    })
+  }
   return (
     <Def>
       <main>
@@ -28,10 +47,10 @@ function show(data) {
               </h4>
             </section>
         <div className="buttons-container">
-          <a href={`/places/${data.id}/edit`} className="btn btn-warning">
+          <a href={`/places/${data.place.id}/edit`} className="btn btn-warning">
             Edit <i className="fas fa-pencil-alt fa-inverse" aria-hidden="true"></i>
           </a>
-          <form method="POST" action={`/places/${data.id}?_method=DELETE`}>
+          <form method="POST" action={`/places/${data.place.id}?_method=DELETE`}>
             <button type="submit" className="btn btn-danger">
               Delete <i className="fa fa-trash" aria-hidden="true"></i>
             </button>
@@ -40,9 +59,21 @@ function show(data) {
           </div>
         </div>
         <section>
-          <h2>Comments</h2>
-          <p>No comments yet!</p>
+        <h2>Comments</h2>
+            {comments}
         </section>
+              <form action={`/places/${data.place.id}/comment`} method="post">
+              <input type="hidden" name="placeId" value={data.place.id} />
+              <label htmlFor="author">Author:</label>
+              <input type="text" id="author" name="author" required />
+              <label htmlFor="content">Content:</label>
+              <textarea id="content" name="content" rows="4" cols="50" required />
+              <label htmlFor="starRating">Star Rating:</label>
+              <input type="number" id="starRating" name="stars" step="0.5" min="0" max="5" required />
+              <label htmlFor="rant">Rant:</label>
+              <input type="checkbox" id="rant" name="rant" />
+              <button type="submit">Submit Comment</button>
+            </form>
       </main>
     </Def>
   )
