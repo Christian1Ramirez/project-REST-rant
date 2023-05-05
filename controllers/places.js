@@ -49,7 +49,14 @@ router.get('/:id', (req, res) => {
 })
 
 router.put('/:id', (req, res) => {
-  res.send('PUT /places/:id stub')
+  db.Place.findByIdAndUpdate(req.params.id, req.body)
+  .then(() => {
+      res.redirect(`/places/${req.params.id}`)
+  })
+  .catch(err => {
+      console.log('err', err)
+      res.render('error404')
+  })
 })
 
 router.delete('/:id', (req, res) => {
@@ -64,11 +71,16 @@ router.delete('/:id', (req, res) => {
 })
 
 router.get('/:id/edit', (req, res) => {
-  res.send('GET edit form stub')
+  db.Place.findById(req.params.id)
+  .then(place => {
+      res.render('places/edit', { place })
+  })
+  .catch(err => {
+      res.render('error404')
+  })
 })
 
 router.post('/:id/comment', (req, res) => {
-  console.log(req.body);
   req.body.rant = req.body.rant ? true : false;
 
   db.Place.findById(req.params.id)
