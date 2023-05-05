@@ -7,7 +7,21 @@ function show(data) {
       No comments yet!
     </h3>
   )
+  let rating = (
+    <h3 className="inactive">
+      Not yet rated
+    </h3>
+  )
   if (data.place.comments.length) {
+    let sumRatings = data.place.comments.reduce((tot, c) => {
+      return tot + c.stars
+    }, 0)
+    let averageRating = sumRatings / data.place.comments.length
+    rating = (
+      <h3>
+        {Math.round(averageRating)} stars
+      </h3>
+    )
     comments = data.place.comments.map(c => {
       return (
         <div className="border">
@@ -35,7 +49,7 @@ function show(data) {
             <h1>{data.place.name}</h1>
             <section className="description-rating">
               <h2>Rating</h2>
-              <p>Currently unrated</p>
+              {rating}
             </section>
             <section className="description-rating">
               <h2>Description</h2>
@@ -64,15 +78,18 @@ function show(data) {
         </section>
               <form action={`/places/${data.place.id}/comment`} method="post">
               <input type="hidden" name="placeId" value={data.place.id} />
+              <label htmlFor="content">Content:</label>
+              <textarea id="content" name="content" rows="2" cols="150" required />
+              <br></br>
               <label htmlFor="author">Author:</label>
               <input type="text" id="author" name="author" required />
-              <label htmlFor="content">Content:</label>
-              <textarea id="content" name="content" rows="4" cols="50" required />
-              <label htmlFor="starRating">Star Rating:</label>
-              <input type="number" id="starRating" name="stars" step="0.5" min="0" max="5" required />
+              <label htmlFor="stars">Star Rating</label>
+              <input type="range" id="stars" name="stars" min="0" max="5"></input>
               <label htmlFor="rant">Rant:</label>
               <input type="checkbox" id="rant" name="rant" />
-              <button type="submit">Submit Comment</button>
+              <br></br>
+              <br></br>
+              <button type="submit" className="btn btn-primary">Submit Comment</button>
             </form>
       </main>
     </Def>
